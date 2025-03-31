@@ -21,7 +21,8 @@ router.post('/login', async function (req, res, next) {
         next(error)
     }
 });
-router.post('/signup', async function (req, res, next) {
+
+router.post('/register', async function (req, res, next) {
     try {
         let username = req.body.username;
         let password = req.body.password;
@@ -36,6 +37,7 @@ router.post('/signup', async function (req, res, next) {
         next(error)
     }
 });
+
 router.get('/me', check_authentication, async function (req, res, next) {
     try {
         res.send({
@@ -46,7 +48,8 @@ router.get('/me', check_authentication, async function (req, res, next) {
         next(error)
     }
 });
-router.post('/changepassword',check_authentication, async function (req, res, next) {
+
+router.post('/change-password', check_authentication, async function (req, res, next) {
     try {
         let oldpassword = req.body.oldpassword;
         let newpassword = req.body.newpassword;

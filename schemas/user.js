@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let bcrypt = require('bcrypt')
+let bcrypt = require('bcryptjs');
 
 let userSchema = new mongoose.Schema({
     username: {
@@ -9,25 +9,34 @@ let userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
-    }, email: {
+        required: true,
+        set: function (value) {
+            return bcrypt.hashSync(value, 10);
+        }
+    },
+    email: {
         type: String,
         required: true,
         unique: true,
-    }, fullName: {
+    },
+    fullName: {
         type: String,
         default: ""
-    }, avatarUrl: {
+    },
+    avatarUrl: {
         type: String,
         default: ""
-    }, status: {
+    },
+    status: {
         type: Boolean,
-        default: false
-    }, role: {
+        default: true
+    },
+    role: {
         type: mongoose.Types.ObjectId,
         ref: 'role',
         required: true
-    }, loginCount: {
+    },
+    loginCount: {
         type: Number,
         default: 0,
         min: 0

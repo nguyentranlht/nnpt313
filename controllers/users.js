@@ -1,6 +1,6 @@
 let userSchema = require('../schemas/user')
 let roleSchema = require('../schemas/role');
-let bcrypt = require('bcrypt')
+let bcrypt = require('bcryptjs')
 module.exports = {
     getAllUsers: async function () {
         return userSchema.find({})
